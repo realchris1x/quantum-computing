@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base Resets ─────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --primary: #4F46E5;
+  --accent:  #06B6D4;
+  --secondary: #8B5CF6;
+  --success:  #10B981;
+  --danger:   #EF4444;
+  --bg:       #F8FAFC;
+  --surface:  #FFFFFF;
+  --border:   #E2E8F0;
+  --text:     #0F172A;
+  --muted:    #64748B;
+  --radius:   16px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', 'SF Pro Display', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scrollbar ────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+/* ── Card ─────────────────────────────────────── */
+.card {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06);
+  border: 1px solid #E2E8F0;
+  transition: all 0.3s;
+}
+.card:hover {
+  box-shadow: 0 4px 24px rgba(79,70,229,0.12), 0 8px 32px rgba(0,0,0,0.08);
+}
+
+
+/* ── Glass Card ───────────────────────────────── */
+.glass {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
+/* ── Gradient Text ────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #4F46E5, #8B5CF6, #06B6D4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Keypad Button ────────────────────────────── */
+.keypad-btn {
+  @apply relative flex items-center justify-center rounded-xl font-semibold text-sm
+         select-none cursor-pointer transition-all duration-150 overflow-hidden;
+  height: 48px;
+  border: 1.5px solid #E2E8F0;
+  background: #FFFFFF;
+  color: #1E293B;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+}
+.keypad-btn:hover {
+  border-color: var(--primary);
+  background: #F5F3FF;
+  color: var(--primary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(79,70,229,0.15);
+}
+.keypad-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+}
+.keypad-btn.op {
+  background: linear-gradient(135deg, #EEF2FF, #F5F3FF);
+  color: var(--primary);
+  border-color: #C7D2FE;
+  font-weight: 700;
+}
+.keypad-btn.op:hover {
+  background: linear-gradient(135deg, #4F46E5, #6366F1);
+  color: white;
+  border-color: transparent;
+}
+.keypad-btn.danger { color: var(--danger); border-color: #FEE2E2; }
+.keypad-btn.danger:hover { background: #FEF2F2; border-color: var(--danger); }
+
+/* Ripple effect */
+.keypad-btn .ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(79,70,229,0.2);
+  transform: scale(0);
+  animation: rippleAnim 0.5s linear;
+  pointer-events: none;
+}
+@keyframes rippleAnim {
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* ── Syntax Highlight ─────────────────────────── */
+.token-var     { color: #2563EB; font-weight: 600; }
+.token-op      { color: #7C3AED; font-weight: 700; }
+.token-paren   { color: #0891B2; font-weight: 600; }
+.token-error   { color: #EF4444; background: #FEF2F2; border-radius: 3px; }
+
+/* ── Gate colors ──────────────────────────────── */
+.gate-x   { fill: #4F46E5; }
+.gate-cx  { fill: #06B6D4; }
+.gate-ccx { fill: #8B5CF6; }
+.gate-tgt { fill: none; stroke: currentColor; }
+
+/* ── Wire ─────────────────────────────────────── */
+.wire-line { stroke: #CBD5E1; stroke-width: 2; }
+.wire-active { stroke: #4F46E5; stroke-width: 2.5; }
+
+/* ── Probability Bar ──────────────────────────── */
+.prob-bar {
+  height: 8px;
+  border-radius: 99px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Convert Button ───────────────────────────── */
+.convert-btn {
+  background: linear-gradient(135deg, #4F46E5 0%, #8B5CF6 50%, #06B6D4 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 4s ease infinite;
+}
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ── Bloch sphere container ───────────────────── */
+.bloch-container { position: relative; }
+.bloch-label {
+  position: absolute;
+  font-size: 12px;
+  font-weight: 700;
+  color: #64748B;
+  pointer-events: none;
+}
+
+/* ── Pipeline Step ────────────────────────────── */
+.pipeline-step {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid #E2E8F0;
+  background: white;
+  transition: all 0.3s;
+}
+.pipeline-step.active {
+  border-color: #4F46E5;
+  background: rgba(79,70,229,0.05);
+  box-shadow: 0 0 20px rgba(79,70,229,0.3);
+}
+.pipeline-step.done {
+  border-color: rgba(16,185,129,0.5);
+  background: rgba(16,185,129,0.05);
+}
+
+
+/* ── Section header ───────────────────────────── */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.section-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: linear-gradient(to bottom right, #4F46E5, #06B6D4);
+}
+
+
+/* ── Tab ──────────────────────────────────────── */
+.tab-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+}
+.tab-btn.active {
+  background: #4F46E5;
+  color: white;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+
+.tab-btn:not(.active) {
+  @apply text-slate-500 hover:text-indigo-600 hover:bg-indigo-50;
+}
+
+
+/* ── Tooltip ──────────────────────────────────── */
+.tooltip {
+  @apply absolute z-50 px-2 py-1 text-xs font-medium text-white bg-slate-800 rounded-lg
+         pointer-events-none whitespace-nowrap;
+
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: #111827;
+}
+
+/* ── Animation helpers ────────────────────────── */
+.fade-in    { animation: fadeIn  0.4s ease-out; }
+.slide-up   { animation: slideUp 0.4s ease-out; }
+@keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
